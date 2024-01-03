@@ -10,6 +10,7 @@ export default {
       sm: '12px',
       base: '14px',
       xl: '16px',
+      '1.5xl': '20px',
       '2xl': '24px',
       '3xl': '32px',
       '4xl': '46px',

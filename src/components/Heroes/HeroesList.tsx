@@ -1,12 +1,14 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 // Components
 import HeroesItem from './HeroesItem';
+import HeroesFilter from './HeroesFilter';
 
 export type Hero = {
   id: number,
   name: string,
-  localized_name: string,
+  localized_name: any,
   primary_attr: string,
   attack_type: string,
   roles: string[]
@@ -14,8 +16,9 @@ export type Hero = {
 
 
 function HeroesList() {
+  const [filteredHeroes, setFilteredHeroes] = useState<Hero[]>();
   const { isPending, error, data } = useQuery({
-    queryKey: ["test"],
+    queryKey: ["Heroes"],
     queryFn: () => fetch('https://api.opendota.com/api/heroes').then((res) => res.json()).then(res => sortHeroesByAlphabet(res))
   });
 
@@ -33,11 +36,16 @@ function HeroesList() {
     return 0
   });
 
+  useEffect(() => {
+    setFilteredHeroes(data)
+  }, [data])
+
   return (
     <section className='mt-8'>
       <h2 className='mb-4 text-left text-3xl'>Heroes</h2>
-      <div className='grid grid-cols-6 gap-4'>
-        {data?.map((item: Hero) => {
+      <HeroesFilter heroes={data} setFilteredHeroes={setFilteredHeroes} />
+      <div className='grid grid-cols-5 gap-4'>
+        {filteredHeroes?.map((item: Hero) => {
           return <HeroesItem key={item.id} itemInfo={item} />
         })}
 
