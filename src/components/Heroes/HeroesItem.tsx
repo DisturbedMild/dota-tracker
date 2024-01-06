@@ -12,9 +12,9 @@ const imageSrc = "/heroes-icons/";
 const attrSrc = '/heroes-attributes';
 
 function HeroesItem(props: HeroProps) {
-  const imageName = props.itemInfo.localized_name.replaceAll(" ", "_").toLowerCase();
+  const imageName = props.itemInfo.localized_name.replaceAll(" ", "_").replaceAll("-", "_").replaceAll("'", "").toLowerCase();
 
-  return <div className="group relative bordered hero-item">
+  return <div className="group relative bordered hero-item" data-id={props.itemInfo.localized_name}>
     <Link to={imageName.replaceAll("_", "")}>
       <img className="w-full group-hover:scale-110 transition-all" src={`${imageSrc}${imageName}.png`} alt={props?.itemInfo.localized_name} />
       <div className="absolute left-0 bottom-0 hidden group-hover:flex items-center gap-2">
