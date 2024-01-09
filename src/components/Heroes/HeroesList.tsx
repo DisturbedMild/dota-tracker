@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Flip } from "gsap/Flip";
+import type { Hero } from '../../types/types';
 
 gsap.registerPlugin(Flip);
 
@@ -10,14 +11,7 @@ gsap.registerPlugin(Flip);
 import HeroesItem from './HeroesItem';
 import HeroesFilter from './HeroesFilter';
 
-export type Hero = {
-  id: number,
-  name: string,
-  localized_name: any,
-  primary_attr: string,
-  attack_type: string,
-  roles: string[]
-}
+
 
 
 function HeroesList() {
@@ -25,14 +19,15 @@ function HeroesList() {
   const heroesItems: HTMLElement[] = gsap.utils.toArray('.hero-item');
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["Heroes"],
-    queryFn: () => fetch('https://api.opendota.com/api/heroes').then((res) => res.json()).then(res => sortHeroesByAlphabet(res))
+    queryKey: ["Heroes"], 
+    queryFn: () => fetch('https://api.opendota.com/api/constants/heroes').then((res) => res.json()).then(res => sortHeroesByAlphabet(Object.values(res)))
   });
 
   if (isPending) "Wait for it....";
 
   if (error) console.log(error)
 
+  console.log(data)
   // Sort fetched data by Alphabet
   const sortHeroesByAlphabet = (heroes: Hero[]): Hero[] => heroes.sort((a: any, b: any) => {
     if (a.localized_name < b.localized_name) {
@@ -74,7 +69,7 @@ function HeroesList() {
       duration: 0.5,
       scale: true,
       ease: "power1.inOut",
-      stagger: 0.01,
+      stagger: 0.05,
       absolute: true,
       onEnter: elements => gsap.fromTo(elements, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.5 }),
       onLeave: elements => gsap.to(elements, { opacity: 0, scale: 0, duration: 0.7 })
