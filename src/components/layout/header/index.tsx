@@ -1,7 +1,9 @@
+import "./index.css";
+
 function Header() {
   return (
-    <header className="header">
-      <div className="mx-auto flex justify-between">
+    <header className="header py-4 px-8 ">
+      <div className="container mx-auto flex justify-between">
         <div className="logo">
           {/* <img src="" alt="logo" /> */}
           Logo

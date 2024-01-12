@@ -19,7 +19,7 @@ function HeroesList() {
   const heroesItems: HTMLElement[] = gsap.utils.toArray('.hero-item');
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["Heroes"], 
+    queryKey: ["Heroes"],
     queryFn: () => fetch('https://api.opendota.com/api/constants/heroes').then((res) => res.json()).then(res => sortHeroesByAlphabet(Object.values(res)))
   });
 
@@ -27,7 +27,6 @@ function HeroesList() {
 
   if (error) console.log(error)
 
-  console.log(data)
   // Sort fetched data by Alphabet
   const sortHeroesByAlphabet = (heroes: Hero[]): Hero[] => heroes.sort((a: any, b: any) => {
     if (a.localized_name < b.localized_name) {
@@ -69,7 +68,7 @@ function HeroesList() {
       duration: 0.5,
       scale: true,
       ease: "power1.inOut",
-      stagger: 0.05,
+      stagger: 0.01,
       absolute: true,
       onEnter: elements => gsap.fromTo(elements, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.5 }),
       onLeave: elements => gsap.to(elements, { opacity: 0, scale: 0, duration: 0.7 })
@@ -83,17 +82,19 @@ function HeroesList() {
     //   duration: 0.7
     // }, 0);
 
-  }, {dependencies: [filteredHeroes]})
+  }, { dependencies: [filteredHeroes] })
 
   return (
     <section className='mt-8'>
-      <h2 className='mb-4 text-left text-3xl'>Heroes</h2>
-      <HeroesFilter heroes={data} setFilteredHeroes={setFilteredHeroes} />
-      <div className='grid grid-cols-5 gap-4 heroes'>
-        {data?.map((item: Hero) => {
-          return <HeroesItem key={item.id} itemInfo={item} />
-        })}
+      <div className="container">
+        <h2 className='mb-4 text-left text-3xl'>Heroes</h2>
+        <HeroesFilter heroes={data} setFilteredHeroes={setFilteredHeroes} />
+        <div className='grid grid-cols-7 gap-4 heroes'>
+          {data?.map((item: Hero) => {
+            return <HeroesItem key={item.id} itemInfo={item} />
+          })}
 
+        </div>
       </div>
     </section>
   )

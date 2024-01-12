@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import SearchIcon from "../ui/icons/SearchIcon";
-import type { Hero } from "./HeroesList";
+import type { Hero } from "../../types/types";
 
 type HeroesFilterProps = {
   setFilteredHeroes: React.Dispatch<React.SetStateAction<any>>;

@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import RootLayout from './pages/RootLayout';
 import HomePage from './pages/HomePage';
-import HeroPage from './pages/HeroPage';
+import HeroPage from './pages/hero-page/page';
 import ErrorPage from './pages/ErrorPage';
 
 
@@ -18,18 +18,16 @@ const router = createBrowserRouter([
       { 
         path: "/:heroId", 
         element: <HeroPage />,
-        loader: async({ request, params }) => {
+        loader: async({ request }) => {
           const heroId = request.url.replace(/(.*)=/, "");
-          const fetchedHeroes = await fetch(`https://api.opendota.com/api/heroes`).then(res => res.json());
-          const fetchedItems = await fetch(`https://api.opendota.com/api/constants/items`).then(res => res.json());
+          // const fetchedItems = await fetch(`https://api.opendota.com/api/constants/items`).then(res => res.json());
           const fetchedHeroesStats = await fetch(`https://api.opendota.com/api/heroStats`).then(res => res.json());
-          const fetchedHeroItemPopularity = await fetch(`https://api.opendota.com/api/heroes/${heroId}/itemPopularity`).then(res => res.json());
-          // console.log(fetchedItems)
+          // const fetchedHeroItemPopularity = await fetch(`https://api.opendota.com/api/heroes/${heroId}/itemPopularity`).then(res => res.json());
+
           return {
-            fetchedHeroes,
             fetchedHeroesStats,
-            fetchedHeroItemPopularity,
-            fetchedItems,
+            // fetchedHeroItemPopularity,
+            // fetchedItems,
             heroId
           }
         }
