@@ -3,8 +3,7 @@ import {
 	QueryClientProvider
 } from '@tanstack/react-query';
 
-
-import HeroesList from '../components/Heroes/HeroesList';
+import HeroesList from '../../components/Heroes/HeroesList/component';
 
 function HomePage() {
 	const queryClient = new QueryClient();

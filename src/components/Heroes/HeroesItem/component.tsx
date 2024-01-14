@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 
-import type { Hero } from "../../types/types";
+// Types
+import type { HeroProps } from "./types";
 
-import "./HeroItem.css";
-
-type HeroProps = {
-  itemInfo: Hero
-}
+// Styles
+import "./styles.css";
 
 const attrSrc = '/heroes-attributes';
 

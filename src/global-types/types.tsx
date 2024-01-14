@@ -1,0 +1,42 @@
+export type Hero = {
+  id: number,
+  name: string,
+  localized_name: any,
+  primary_attr: string,
+  attack_type: string,
+  roles: string[],
+  img: string,
+}
+
+
+export type HeroStats = {
+  id: number,
+  name: string,
+  localized_name: any,
+  primary_attr: string,
+  attack_type: string,
+  roles: string[],
+  img: string,
+  agi_gain: number,
+  str_gain: number,
+  int_gain: number,
+  attack_range: number,
+  attack_rate: number,
+  base_agi: number,
+  base_str: number,
+  base_int: number,
+  base_armor: number,
+  base_attack_max: number,
+  base_attack_min: number,
+  base_attack_time: number,
+  base_health: number,
+  base_health_regen: number,
+  base_mana: number,
+  base_mana_regen: number,
+  base_mr: number,
+  day_vision: number,
+  move_speed: number,
+  night_vision: number,
+  projectile_speed: number,
+  turn_rate: number | null
+}
